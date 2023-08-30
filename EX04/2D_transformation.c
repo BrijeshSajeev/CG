@@ -3,18 +3,21 @@
 #include <math.h>
 #include <graphics.h>
 
-int x, y, az, w, xa, ya, ra, a[10], b[10], da, db;
-float dx, dy, theta, sx, sy, x1s, y1s, a1[10], b1[10];
+int x, y, az, w, xa, ya, ra, a[10], b[10], width, height;
+float shiftx, shifty, theta, scalex, scaley, xshear, yshear, a1[10], b1[10];
+
+// (x, y) as the upper-left corner and (az, w) as the lower-right corner.
+// The arrays a and b seem to store the coordinates of the four corners of the rectangle.
 
 void drawRectangle() {
     rectangle(x, y, az, w);
 }
 
 void translate() {
-    x += dx;
-    y += dy;
-    az += dx;
-    w += dy;
+    x += shiftx;
+    y += shifty;
+    az += shiftx;
+    w += shifty;
     drawRectangle();
 }
 
@@ -33,50 +36,80 @@ void rotate() {
 }
 
 void scale() {
-    x *= sx;
-    y *= sy;
-    az *= sx;
-    w *= sy;
+    x *= scalex;
+    y *= scaley;
+    az *= scalex;
+    w *= scaley;
     drawRectangle();
 }
 
 void reflectXAxis() {
-    for (int i = 0; i < 4; i++) {
-        a1[i] = a[i];
-        b1[i] = -b[i];
+    printf("Enter the fixed point\n"); 
+    scanf("%d%d",&xa,&ya); 
+    theta=(float)(90*(3.14/180)); 
+    for(i=0;i<4;i++)
+    {
+        a1[i]=(xa+((a[i]-xa)*cos(theta)-(-b[i]-ya)*sin(theta)));
+        b1[i]=(ya+((a[i]-xa)*sin(theta)+(-b[i]-ya)*cos(theta)));
     }
-    drawRectangle();
+    for(i=0;i<4;i++)
+    {
+        if(i!=3) 
+          line(a1[i],b1[i],a1[i+1],b1[i+1]); 
+        else 
+            line(a1[i],b1[i],a1[0],b1[0]);
+    }
 }
 
 void reflectYAxis() {
-    for (int i = 0; i < 4; i++) {
-        a1[i] = -a[i];
-        b1[i] = b[i];
+    printf("Enter the fixed point\n"); 
+    scanf("%d%d",&xa,&ya); 
+    theta=(float)(270*(3.14/180)); 
+    for(i=0;i<4;i++)
+    {
+        a1[i]=(xa+((-a[i]-xa)*cos(theta)-(b[i]-ya)*sin(theta)));
+        b1[i]=(ya+((-a[i]-xa)*sin(theta)+(b[i]-ya)*cos(theta)));
     }
-    drawRectangle();
+    for(i=0;i<4;i++)
+    {
+        if(i!=3) 
+            line(a1[i],b1[i],a1[i+1],b1[i+1]); 
+        else 
+            line(a1[i],b1[i],a1[0],b1[0]);
+    }
 }
 
 void reflectBothAxis() {
-    for (int i = 0; i < 4; i++) {
-        a1[i] = -a[i];
-        b1[i] = -b[i];
+    printf("Enter the fixed point\n"); 
+    scanf("%d%d",&xa,&ya); 
+    theta=(float)(180*(3.14/180)); 
+    for(i=0;i<4;i++)
+    {
+        a1[i]=(xa+((-a[i]-xa)*cos(theta)-(-b[i]-ya)*sin(theta)));
+        b1[i]=(ya+((-a[i]-xa)*sin(theta)+(-b[i]-ya)*cos(theta)));
     }
-    drawRectangle();
+    for(i=0;i<4;i++)
+    {
+        if(i!=3) 
+            line(a1[i],b1[i],a1[i+1],b1[i+1]); 
+        else 
+            line(a1[i],b1[i],a1[0],b1[0]);
+    }
 }
 
 void shearXDirection() {
-    x += y * x1s;
+    x += y * xshear;
     y = y;
-    az += w * x1s;
+    az += w * xshear;
     w = w;
     drawRectangle();
 }
 
 void shearYDirection() {
     x = x;
-    y += x * y1s;
+    y += x * yshear;
     az = az;
-    w += az * y1s;
+    w += az * yshear;
     drawRectangle();
 }
 
@@ -93,16 +126,16 @@ int main() {
     scanf("%d%d", &az, &w);
 
     rectangle(x, y, az, w);
-    da = az - x;
-    db = w - y;
+    width = az - x; //width
+    height = w - y; //height
     a[0] = x;
     b[0] = y;
-    a[1] = x + da;
+    a[1] = x + width;
     b[1] = y;
-    a[2] = x + da;
-    b[2] = y + db;
+    a[2] = x + width;
+    b[2] = y + height;
     a[3] = x;
-    b[3] = y;
+    b[3] = y + height;
 
     while (1) {
         printf("******2D Transformations*******\n");
@@ -117,7 +150,7 @@ int main() {
                 drawRectangle();
                 printf("*******Translation*******\n\n");
                 printf("Enter the value of shift vector:\n");
-                scanf("%f%f", &dx, &dy);
+                scanf("%f%f", &shiftx, &shifty);
                 translate();
                 break;
 
@@ -137,7 +170,7 @@ int main() {
                 drawRectangle();
                 printf("*******Scaling*******\n\n");
                 printf("Enter the value of scaling factor:\n");
-                scanf("%f%f", &sx, &sy);
+                scanf("%f%f", &scalex, &scaley);
                 scale();
                 break;
 
@@ -175,13 +208,13 @@ int main() {
                 switch (ch2) {
                     case 1:
                         printf("Enter the value of shear:\n");
-                        scanf("%f", &x1s);
+                        scanf("%f", &xshear);
                         shearXDirection();
                         break;
 
                     case 2:
                         printf("Enter the value of shear:\n");
-                        scanf("%f", &y1s);
+                        scanf("%f", &yshear);
                         shearYDirection();
                         break;
                 }
