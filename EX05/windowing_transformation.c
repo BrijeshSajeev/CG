@@ -11,7 +11,7 @@ void drawLine(int x1, int y1, int x2, int y2) {
     line(x1, y1, x2, y2);
 }
 
-void translateAndScale(int x1, int y1, int x2, int y2, int x3, int y3, int v1, int v2, int v3, int v4) {
+void translateAndScale(int x1, int y1, int x2, int y2, int x3, int y3, int v1, int v2, int v3, int v4,int w1,int w2,int w3,int w4) {
     float sx = (float)(v3 - v1) / (w3 - w1);
     float sy = (float)(v4 - v2) / (w4 - w2);
     
@@ -45,7 +45,7 @@ int main() {
     
     cleardevice();
     drawRectangle(v1, v2, v3, v4);
-    translateAndScale(x1, y1, x2, y2, x3, y3, v1, v2, v3, v4);
+    translateAndScale(x1, y1, x2, y2, x3, y3, v1, v2, v3, v4,w1,w2,w3,w4);
     
     getch();
     
