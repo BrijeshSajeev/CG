@@ -1,40 +1,18 @@
 #include <stdio.h>
 #include <conio.h>
-#include <graphics.h>
 #include <math.h>
-#include <dos.h>
+#include <stdlib.h>
+#include <graphics.h>
 
-int xt = 100, yb = 200, xr = 400, yt = 400, xi, yi;
+int code(int, int);
+int visible(int, int, int);
+void drawRectangle(int, int, int, int);
+void dda(int, int, int, int);
 
-void drawRectangle(int left, int top, int right, int bottom) {
-    dda(left, top, right, top);
-    dda(right, top, right, bottom);
-    dda(right, bottom, left, bottom);
-    dda(left, bottom, left, top);
-}
-
-void dda(int x1, int y1, int x2, int y2) {
-    float x, y, dy, dx, len;
-    int i;
-
-    if (abs(y2 - y1) >= abs(x2 - x1)) len = abs(y2 - y1);
-    else len = abs(x2 - x1);
-
-    dx = (x2 - x1) / len;
-    dy = (y2 - y1) / len;
-    x = x1 + 0.5 * dx;
-    y = y1 + 0.5 * dy;
-
-    for (i = 1; i <= len; i++) {
-        putpixel(x, y, getmaxcolor());
-        x += dx;
-        y += dy;
-    }
-}
-
-int main() {
+void main() {
     int gd = DETECT, gm, n, i, m = 0, c1, c2, ct = 0, v, e, s;
     int nx[20], ny[20], c, x1, x2, y1, y2, x[20], y[20];
+    int xt = 100, yb = 200, xr = 400, yt = 400, xi, yi;
 
     detectgraph(&gd, &gm);
     initgraph(&gd, &gm, "e:\\tcplus\\bgi");
@@ -43,12 +21,12 @@ int main() {
     scanf("%d", &n);
 
     for (i = 0; i < n; i++) {
-        printf("\nEnter vertex coordinates:");
+        printf("\nEnter polygon co-ordinates:");
         scanf("%d%d", &x[i], &y[i]);
     }
     n++;
-    x[n] = x[0];
-    y[n] = y[0];
+    x[n] = x[1];
+    y[n] = y[1];
 
     printf("\nEnter window coordinates:");
     scanf("%d%d%d%d", &xt, &yb, &xr, &yt);
@@ -56,9 +34,8 @@ int main() {
     cleardevice();
     drawRectangle(xt, yb, xr, yt);
 
-    moveto(x[0], y[0]);
-
-    for (i = 1; i <= n; i++)
+    moveto(x[1], y[1]);
+    for (i = 2; i <= n; i++)
         lineto(x[i], y[i]);
 
     getch();
@@ -66,9 +43,9 @@ int main() {
 
     do {
         m = 0;
-
         for (i = 1; i <= n; i++) {
-            if ((i == 1) && (ct == 0)) goto pro;
+            if ((i == 1) && (ct == 0))
+                goto pro;
             else {
                 c2 = code(x[i], y[i]);
                 c = (int)pow((float)2, (float)ct);
@@ -101,20 +78,19 @@ int main() {
                     ny[m] = yi;
                 }
             }
-        }
-    pro:
-        s = i;
-        c1 = code(x[i], y[i]);
-        v = visible(x[i], y[i], ct);
+        pro:
+            s = i;
+            c1 = code(x[i], y[i]);
+            v = visible(x[i], y[i], ct);
 
-        if (v == 1) {
-            m++;
-            nx[m] = x[i];
-            ny[m] = y[i];
+            if (v == 1) {
+                m++;
+                nx[m] = x[i];
+                ny[m] = y[i];
+            }
         }
         ct++;
         n = m;
-
         for (i = 1; i <= n; i++) {
             x[i] = nx[i];
             y[i] = ny[i];
@@ -132,12 +108,60 @@ int main() {
 
     getch();
     closegraph();
-
-    return 0;
 }
 
 int code(int a, int b) {
     int c = 0;
-
     if (a < xt) c += 1;
-   
+    if (a > xr) c += 2;
+    if (b < yb) c += 8;
+    if (b > yt) c += 4;
+    return (c);
+}
+
+int visible(int a, int b, int c) {
+    int code(int, int);
+    int d, e;
+    d = code(a, b);
+    e = (int)pow((float)2, (float)c);
+    if ((d & e) == 0)
+        return (1);
+    else
+        return (0);
+}
+
+void drawRectangle(int xt, int yb, int xr, int yt) {
+    dda(xt, yb, xr, yb);
+    dda(xr, yb, xr, yt);
+    dda(xr, yt, xt, yt);
+    dda(xt, yt, xt, yb);
+}
+
+void dda(int x1, int y1, int x2, int y2) {
+    float x, y, dy, dx, len;
+    int i;
+
+    if (abs(y2 - y1) >= abs(x2 - x1))
+        len = abs(y2 - y1);
+    else
+        len = abs(x2 - x1);
+
+    dx = (x2 - x1) / len;
+    dy = (y2 - y1) / len;
+    x = x1 + 0.5 * dx;
+    y = y1 + 0.5 * dy;
+
+    for (i = 1; i <= len; i++) {
+        putpixel(x, y, getmaxcolor());
+        x += dx;
+        y += dy;
+    }
+}
+
+/*
+Enter the number of vertices: 3
+Enter polygon co-ordinates: 200 300
+Enter polygon co-ordinates: 300 400
+Enter polygon co-ordinates: 300 150
+Enter window co-ordinates: 200 200 400 400
+*/
