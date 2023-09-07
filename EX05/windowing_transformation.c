@@ -52,3 +52,12 @@ int main() {
     closegraph();
     return 0;
 }
+/*
+Enter the Co-ordinates x1, y1, x2, y2, x3, y3 >> 
+100
+150
+200
+100
+50
+150
+*/

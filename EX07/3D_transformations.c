@@ -129,13 +129,20 @@ void create() {
     settextstyle(0, 0, 5);
     outtextxy(10, 30, "cube");
 
-    a[0].x1 = x; a[0].y1 = y; a[0].z1 = z;
-    a[1].x1 = x + d; a[1].y1 = y; a[1].z1 = z;
-    a[2].x1 = x + d; a[2].y1 = y + d; a[2].z1 = z;
-    a[3].x1 = x; a[3].y1 = y + d; a[3].z1 = z;
+    a[0].x1 = x;   a[0].y1 = y;   a[0].z1 = z;
+
+    a[1].x1 = x + d;   a[1].y1 = y;   a[1].z1 = z;
+
+    a[2].x1 = x + d;  a[2].y1 = y + d;  a[2].z1 = z;
+
+    a[3].x1 = x;  a[3].y1 = y + d;  a[3].z1 = z;
+
     a[4].x1 = x; a[4].y1 = y; a[4].z1 = z - d;
+
     a[5].x1 = x + d; a[5].y1 = y; a[5].z1 = z - d;
+
     a[6].x1 = x + d; a[6].y1 = y + d; a[6].z1 = z - d;
+    
     a[7].x1 = x; a[7].y1 = y + d; a[7].z1 = z - d;
 
     for (i = 0; i < 8; i++) {

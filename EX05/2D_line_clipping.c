@@ -106,3 +106,8 @@ int main() {
     closegraph();
     return 0;
 }
+/*
+Enter the 1st co-ordinate of line: 150 300
+Enter the 2nd co-ordinate of line: 450 300
+Enter the co-ordinates of clipping window: 200 200 400 400
+*/

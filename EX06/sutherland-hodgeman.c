@@ -34,8 +34,8 @@ void main() {
     cleardevice();
     drawRectangle(xt, yb, xr, yt);
 
-    moveto(x[1], y[1]);
-    for (i = 2; i <= n; i++)
+    moveto(x[0], y[0]);
+    for (i = 1; i < n; i++)
         lineto(x[i], y[i]);
 
     getch();

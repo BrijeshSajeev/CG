@@ -229,3 +229,16 @@ int main() {
     closegraph();
     return 0;
 }
+/*
+1)translate :
+Enter the value of shift vector : 30 40
+2) Rotation
+Enter the value of fixed point and angle of rotation : 30 30 30
+3)scaling
+Enter the value of scaling factor : 2 1
+4) Shear shearX ShearY
+x += y * shearX
+y=y
+az +=w*shearX
+w=w
+*/
