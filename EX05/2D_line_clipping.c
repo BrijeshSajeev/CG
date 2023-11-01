@@ -2,6 +2,8 @@
 #include <conio.h>
 #include <graphics.h>
 
+// Working..
+
 float x1, y1, x2, y2, xmin, ymin, xmax, ymax, m;
 
 void drawLine(float x1, float y1, float x2, float y2) {
@@ -9,6 +11,7 @@ void drawLine(float x1, float y1, float x2, float y2) {
 }
 
 void clipLine() {
+    int i;
     float a[4] = {0}, b[4] = {0}, c[4] = {0};
     
     if (x1 < xmin) a[3] = 1;
@@ -20,7 +23,7 @@ void clipLine() {
     if (y2 < ymin) b[1] = 1;
     if (y2 > ymax) b[0] = 1;
     
-    for (int i = 0; i < 4; i++) {
+    for ( i = 0; i < 4; i++) {
         c[i] = a[i] && b[i];
     }
     
@@ -87,7 +90,7 @@ int main() {
     int gd = DETECT, gm;
     
     clrscr();
-    initgraph(&gd, &gm, "c:\\dosapp~1\\tc\\bgi");
+    initgraph(&gd, &gm, "c:\\turboc3\\bgi");
     
     printf("\nEnter the 1st co-ordinate of line: ");
     scanf("%f %f", &x1, &y1);

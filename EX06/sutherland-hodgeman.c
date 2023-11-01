@@ -4,18 +4,21 @@
 #include <stdlib.h>
 #include <graphics.h>
 
+// Working..
+
 int code(int, int);
 int visible(int, int, int);
 void drawRectangle(int, int, int, int);
 void dda(int, int, int, int);
 
+int nx[20], ny[20], c, x1, x2, y1, y2, x[20], y[20];
+int xt = 100, yb = 200, xr = 400, yt = 400, xi, yi;
+
 void main() {
     int gd = DETECT, gm, n, i, m = 0, c1, c2, ct = 0, v, e, s;
-    int nx[20], ny[20], c, x1, x2, y1, y2, x[20], y[20];
-    int xt = 100, yb = 200, xr = 400, yt = 400, xi, yi;
 
     detectgraph(&gd, &gm);
-    initgraph(&gd, &gm, "e:\\tcplus\\bgi");
+    initgraph(&gd, &gm, "c:\\turboc3\\bgi");
 
     printf("\nEnter the number of vertices:");
     scanf("%d", &n);

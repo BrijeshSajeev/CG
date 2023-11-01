@@ -5,6 +5,7 @@
 #include <math.h>
 #include <dos.h>
 
+// Not workin..
 struct Cube {
     int x1, y1, z1;
 };

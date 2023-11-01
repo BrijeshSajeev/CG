@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <graphics.h>
 #include <math.h>
+// Working..
 
 void drawRectangle(int left, int top, int right, int bottom) {
     rectangle(left, top, right, bottom);
@@ -31,7 +32,7 @@ int main() {
     int x1, y1, x2, y2, x3, y3, v1 = 425, v2 = 75, v3 = 550, v4 = 250;
     
     int gd = DETECT, gm;
-    initgraph(&gd, &gm, "..//bgi");
+    initgraph(&gd, &gm, "c:\\turboc3\\bgi");
     
     printf("Enter the Co-ordinates x1, y1, x2, y2, x3, y3\n");
     scanf("%d%d%d%d%d%d", &x1, &y1, &x2, &y2, &x3, &y3);

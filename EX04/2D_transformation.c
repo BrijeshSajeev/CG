@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <math.h>
 #include <graphics.h>
+// Working
 
 int x, y, az, w, xa, ya, ra, a[10], b[10], width, height;
 float shiftx, shifty, theta, scalex, scaley, xshear, yshear, a1[10], b1[10];
@@ -22,8 +23,9 @@ void translate() {
 }
 
 void rotate() {
+    int i;
     theta = ra * (3.14 / 180);
-    for (int i = 0; i < 4; i++) {
+    for ( i = 0; i < 4; i++) {
         a1[i] = xa + ((a[i] - xa) * cos(theta) - (b[i] - ya) * sin(theta));
         b1[i] = ya + ((a[i] - xa) * sin(theta) + (b[i] - ya) * cos(theta));
     }
@@ -44,6 +46,7 @@ void scale() {
 }
 
 void reflectXAxis() {
+    int i;
     printf("Enter the fixed point\n"); 
     scanf("%d%d",&xa,&ya); 
     theta=(float)(90*(3.14/180)); 
@@ -62,6 +65,7 @@ void reflectXAxis() {
 }
 
 void reflectYAxis() {
+    int i;
     printf("Enter the fixed point\n"); 
     scanf("%d%d",&xa,&ya); 
     theta=(float)(270*(3.14/180)); 
@@ -80,6 +84,7 @@ void reflectYAxis() {
 }
 
 void reflectBothAxis() {
+    int i;
     printf("Enter the fixed point\n"); 
     scanf("%d%d",&xa,&ya); 
     theta=(float)(180*(3.14/180)); 
@@ -118,7 +123,7 @@ int main() {
 
     clrscr();
     detectgraph(&gm, &gr);
-    initgraph(&gm, &gr, "d:\\tc\\BGI");
+    initgraph(&gm, &gr, "c:\\turboc3\\BGI");
 
     printf("Enter the upper left corner of the rectangle:\n");
     scanf("%d%d", &x, &y);
@@ -146,7 +151,7 @@ int main() {
         switch (ch) {
             case 1:
                 detectgraph(&gm, &gr);
-                initgraph(&gm, &gr, "d:\\tc\\BGI");
+                initgraph(&gm, &gr, "c:\\turboc3\\BGI");
                 drawRectangle();
                 printf("*******Translation*******\n\n");
                 printf("Enter the value of shift vector:\n");
@@ -156,7 +161,7 @@ int main() {
 
             case 2:
                 detectgraph(&gm, &gr);
-                initgraph(&gm, &gr, "d:\\tc\\BGI");
+                initgraph(&gm, &gr, "c:\\turboc3\\BGI");
                 drawRectangle();
                 printf("*******Rotation*******\n\n");
                 printf("Enter the value of fixed point and angle of rotation:\n");
@@ -166,7 +171,7 @@ int main() {
 
             case 3:
                 detectgraph(&gm, &gr);
-                initgraph(&gm, &gr, "d:\\tc\\BGI");
+                initgraph(&gm, &gr, "c:\\turboc3\\BGI");
                 drawRectangle();
                 printf("*******Scaling*******\n\n");
                 printf("Enter the value of scaling factor:\n");
@@ -176,7 +181,7 @@ int main() {
 
             case 4:
                 detectgraph(&gm, &gr);
-                initgraph(&gm, &gr, "d:\\tc\\BGI");
+                initgraph(&gm, &gr, "c:\\turboc3\\BGI");
                 drawRectangle();
                 printf("*******Reflection*********\n");
                 printf("1. About x-axis\n2. About y-axis\n3. About both axes\nEnter your choice:\n");
@@ -199,7 +204,7 @@ int main() {
 
             case 5:
                 detectgraph(&gm, &gr);
-                initgraph(&gm, &gr, "d:\\tc\\BGI");
+                initgraph(&gm, &gr, "c:\\turboc3\\BGI");
                 drawRectangle();
                 printf("*******Shearing******\n\n");
                 printf("1. x-direction shear\n2. y-direction shear\nEnter your choice:\n");
