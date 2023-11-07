@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<dos.h>
 #include<graphics.h>
 
 void main(){
@@ -20,24 +21,23 @@ void main(){
 
 	for(int i=0;x<y;i++){
 		if(p<0){
-			p=p+(2*x)+3;
-			x++;
+			p= p + (2*x) + 3;
 		}
 		else{
-			p=p+(2*x)+3-(2*y)+2;
-			x++;
+			p = p + 2 * (x - y) + 5;
 			y--;
 		}
+		x++;	
 
-		putpixel(xa+x,ya+y,1);
-		putpixel(xa-x,ya+y,2);
-		putpixel(xa+x,ya-y,3);
-		putpixel(xa-x,ya-y,4);
-		putpixel(xa+y,ya+x,5);
-		putpixel(xa-y,ya+x,6);
-		putpixel(xa+y,ya-x,7);
-		putpixel(xa-y,ya-x,8);
-
+		putpixel(xa+x,ya+y,RED);
+		putpixel(xa-x,ya+y,RED);
+		putpixel(xa+x,ya-y,RED);
+		putpixel(xa-x,ya-y,RED);
+		putpixel(xa+y,ya+x,RED);
+		putpixel(xa-y,ya+x,RED);
+		putpixel(xa+y,ya-x,RED);
+		putpixel(xa-y,ya-x,RED);
+		delay(50);
 		
 	}
 

@@ -33,7 +33,7 @@ void ellipse(int a,int b){
 	}
 
 	for(y=0;y<=b;y++){
-		x=a* sqrt(1-(y*y))/(float)(b*b);
+		x = a* sqrt(1-(y*y))/(float)(b*b);
 
 		putpixel(200+x,200+y,7);
 

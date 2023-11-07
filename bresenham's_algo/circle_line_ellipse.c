@@ -41,7 +41,7 @@ void draw_line(){
 	int line_style,line_color,line_thikness;
 
 	printf("\nEnter the co-ordinates >> ");
-	scanf("%d%d%d%D",&x1,&y1,&x2,&y2);
+	scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
 	printf("\nEnter the line style >> ");
 	scanf("%d",&line_style);
 	printf("\nEnter line thikness 1/2/3 >> ");
@@ -63,14 +63,20 @@ void draw_circle(){
 	int radius,x,y;
 	int fill_style,color;
 
-	printf("\nEnter the radius >> ");scanf("%d",&radius);
-	printf("\nEnter the fill style >>);
+	printf("\nEnter the radius >> ");
+	scanf("%d",&radius);
+	printf("\nEnter the fill style >> ");
 	scanf("%d",&fill_style);
-	printf("\nEnter the color >> ");scanf("%d",&color);
+	printf("\nEnter the color >> ");
+	scanf("%d",&color);
 
 	clrscr();
 	cleardevice();
 	
+// void setfillstyle(int pattern, int color)
+// void floodfill(int x, int y, int border_color)
+
+
 	setcolor(color);
 	setfillstyle(fill_style,color);
 	
@@ -102,10 +108,10 @@ void draw_elipse(){
 
 	setcolor(color);
 	setfillstyle(fill_style,color);
-	
+	//  ellipse(x, y, start_angle, end_angle, x_rad, y_rad); 
 	ellipse(x,y,0,360,x_radius,y_radius);
 
-	fillellipse(x,y,x_radius,y_radius);
+	fillellipse(x , y, x_radius,y_radius);
 
 	getch();
 

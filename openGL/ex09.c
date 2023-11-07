@@ -8,6 +8,13 @@ void display(void);
 void idle(void);
 void visible(int vis);
 
+/*
+light0_ambient, light0_diffuse, light1_diffuse, light1_position, light2_diffuse,
+light2_position are arrays representing different properties of lights.
+These properties include ambient and diffuse components, 
+as well as the position of lights in 3D space.
+*/
+
 // Global variables
 GLfloat light0_ambient[] = {0.2, 0.2, 0.2, 1.0};
 GLfloat light0_diffuse[] = {0.0, 0.0, 0.0, 1.0};
@@ -15,22 +22,27 @@ GLfloat light1_diffuse[] = {1.0, 0.0, 0.0, 1.0};
 GLfloat light1_position[] = {1.0, 1.0, 1.0, 0.0};
 GLfloat light2_diffuse[] = {0.0, 1.0, 0.0, 1.0};
 GLfloat light2_position[] = {-1.0, -1.0, 1.0, 0.0};
-GLfloat angle1 = 0.0, angle2 = 0.0;
+GLfloat angle1 = 0.0, angle2 = 0.0; //angle1 and angle2 are variables used to control the rotation angles of some objects in the scene. 
 float s = 0.0;
 
 int main(int argc, char **argv)
-{
-    // Initialize GLUT
-    glutInit(&argc, argv);
+{                                                               
+    // Initialize GLUT (Graphics Library Utility Toolkit)
+    glutInit(&argc, argv);// It takes command-line arguments (argc and argv) which are typically passed to the program when it is executed
+    
+    // (GLUT_DOUBLE), which helps prevent flickering in animations.
+    // it also specifies that the color mode is RGB (GLUT_RGB),
+    // it enables depth buffering (GLUT_DEPTH) which is essential for handling 3D scenes properly.
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    // This function creates a window with the specified title, in this case, "Blender
     glutCreateWindow("Blender");
     
     // Set callback functions
     glutDisplayFunc(display);
     glutVisibilityFunc(visible);
 
-    // Initialize OpenGL settings
-    glEnable(GL_DEPTH_TEST);
+    // Initialize OpenGL settings   
+    glEnable(GL_DEPTH_TEST); 
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

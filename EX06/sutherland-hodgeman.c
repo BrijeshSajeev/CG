@@ -12,6 +12,7 @@ void drawRectangle(int, int, int, int);
 void dda(int, int, int, int);
 
 int nx[20], ny[20], c, x1, x2, y1, y2, x[20], y[20];
+
 int xt = 100, yb = 200, xr = 400, yt = 400, xi, yi;
 
 void main() {
